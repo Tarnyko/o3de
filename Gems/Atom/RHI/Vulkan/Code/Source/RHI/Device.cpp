@@ -135,10 +135,13 @@ namespace AZ
             uint32_t minorVersion = VK_VERSION_MINOR(physicalProperties.apiVersion);
 
             // unbounded array functionality
+            /*
             VkPhysicalDeviceDescriptorIndexingFeaturesEXT descriptorIndexingFeatures = {};
             descriptorIndexingFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT;
+            */
             const VkPhysicalDeviceDescriptorIndexingFeaturesEXT& physicalDeviceDescriptorIndexingFeatures =
                 physicalDevice.GetPhysicalDeviceDescriptorIndexingFeatures();
+            /*
             descriptorIndexingFeatures.shaderInputAttachmentArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderInputAttachmentArrayDynamicIndexing;
             descriptorIndexingFeatures.shaderUniformTexelBufferArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderUniformTexelBufferArrayDynamicIndexing;
             descriptorIndexingFeatures.shaderStorageTexelBufferArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayDynamicIndexing;
@@ -152,20 +155,24 @@ namespace AZ
             descriptorIndexingFeatures.descriptorBindingPartiallyBound = physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayNonUniformIndexing;
             descriptorIndexingFeatures.descriptorBindingVariableDescriptorCount = physicalDeviceDescriptorIndexingFeatures.descriptorBindingVariableDescriptorCount;
             descriptorIndexingFeatures.runtimeDescriptorArray = physicalDeviceDescriptorIndexingFeatures.runtimeDescriptorArray;
+            */
 
-            VkPhysicalDeviceBufferDeviceAddressFeaturesEXT bufferDeviceAddressFeatures = {};
+            /*VkPhysicalDeviceBufferDeviceAddressFeaturesEXT bufferDeviceAddressFeatures = {};
             bufferDeviceAddressFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT;
+            */
             const VkPhysicalDeviceBufferDeviceAddressFeaturesEXT& physicalDeviceBufferDeviceAddressFeatures =
                 physicalDevice.GetPhysicalDeviceBufferDeviceAddressFeatures();
+            /*
             bufferDeviceAddressFeatures.bufferDeviceAddress = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddress;
             bufferDeviceAddressFeatures.bufferDeviceAddressCaptureReplay = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressCaptureReplay;
             bufferDeviceAddressFeatures.bufferDeviceAddressMultiDevice = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressMultiDevice;
             descriptorIndexingFeatures.pNext = &bufferDeviceAddressFeatures;
+            */
 
             VkPhysicalDeviceDepthClipEnableFeaturesEXT depthClipEnabled = {};
             depthClipEnabled.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT;
             depthClipEnabled.depthClipEnable = physicalDevice.GetPhysicalDeviceDepthClipEnableFeatures().depthClipEnable;
-            bufferDeviceAddressFeatures.pNext = &depthClipEnabled;
+            //bufferDeviceAddressFeatures.pNext = &depthClipEnabled;
 
             VkPhysicalDeviceRobustness2FeaturesEXT robustness2 = {};
             robustness2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT;
@@ -173,8 +180,9 @@ namespace AZ
             depthClipEnabled.pNext = &robustness2;
 
             VkPhysicalDeviceVulkan12Features vulkan12Features = {};
-            VkPhysicalDeviceShaderFloat16Int8FeaturesKHR float16Int8 = {};
-            VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR separateDepthStencil = {};
+            //VkPhysicalDeviceShaderFloat16Int8FeaturesKHR float16Int8 = {};
+            //VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR separateDepthStencil = {};
+            VkPhysicalDeviceRayTracingFeaturesKHR rayTracingFeatures = {};
 
             // If we are running Vulkan >= 1.2, then we must use VkPhysicalDeviceVulkan12Features instead
             // of VkPhysicalDeviceShaderFloat16Int8FeaturesKHR or VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.
@@ -190,10 +198,46 @@ namespace AZ
                 vulkan12Features.descriptorBindingPartiallyBound = physicalDeviceVulkan12Features.descriptorBindingPartiallyBound;
                 vulkan12Features.descriptorBindingVariableDescriptorCount = physicalDeviceVulkan12Features.descriptorBindingVariableDescriptorCount;
                 vulkan12Features.descriptorIndexing = physicalDeviceVulkan12Features.descriptorIndexing;
+
+
+                //////////////
+                vulkan12Features.shaderInputAttachmentArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderInputAttachmentArrayDynamicIndexing;
+                vulkan12Features.shaderUniformTexelBufferArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderUniformTexelBufferArrayDynamicIndexing;
+                vulkan12Features.shaderStorageTexelBufferArrayDynamicIndexing = physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayDynamicIndexing;
+                vulkan12Features.shaderUniformBufferArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderUniformBufferArrayNonUniformIndexing;
+                vulkan12Features.shaderSampledImageArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderSampledImageArrayNonUniformIndexing;
+                vulkan12Features.shaderStorageBufferArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderStorageBufferArrayNonUniformIndexing;
+                vulkan12Features.shaderStorageImageArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderStorageImageArrayNonUniformIndexing;
+                vulkan12Features.shaderInputAttachmentArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderInputAttachmentArrayNonUniformIndexing;
+                vulkan12Features.shaderUniformTexelBufferArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderUniformTexelBufferArrayNonUniformIndexing;
+                vulkan12Features.shaderStorageTexelBufferArrayNonUniformIndexing = physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayNonUniformIndexing;
+                vulkan12Features.descriptorBindingPartiallyBound = physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayNonUniformIndexing;
+                vulkan12Features.descriptorBindingVariableDescriptorCount = physicalDeviceDescriptorIndexingFeatures.descriptorBindingVariableDescriptorCount;
+                vulkan12Features.runtimeDescriptorArray = physicalDeviceDescriptorIndexingFeatures.runtimeDescriptorArray;
+                vulkan12Features.bufferDeviceAddress = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddress;
+                vulkan12Features.bufferDeviceAddressCaptureReplay = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressCaptureReplay;
+                vulkan12Features.bufferDeviceAddressMultiDevice = physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressMultiDevice;
+                ////////////
+
                 robustness2.pNext = &vulkan12Features;
+                /*
+                VkPhysicalDeviceRayTracingFeaturesKHR physicalDeviceRayTracingFeatures = physicalDevice.GetPhysicalDeviceRayTracingFeatures();
+                rayTracingFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR;
+                rayTracingFeatures.rayTracing = physicalDeviceRayTracingFeatures.rayTracing;
+                rayTracingFeatures.rayTracingShaderGroupHandleCaptureReplay = physicalDeviceRayTracingFeatures.rayTracingShaderGroupHandleCaptureReplay;
+                rayTracingFeatures.rayTracingShaderGroupHandleCaptureReplayMixed = physicalDeviceRayTracingFeatures.rayTracingShaderGroupHandleCaptureReplayMixed;
+                rayTracingFeatures.rayTracingAccelerationStructureCaptureReplay = physicalDeviceRayTracingFeatures.rayTracingAccelerationStructureCaptureReplay;
+                rayTracingFeatures.rayTracingIndirectTraceRays = physicalDeviceRayTracingFeatures.rayTracingIndirectTraceRays;
+                rayTracingFeatures.rayTracingIndirectAccelerationStructureBuild = physicalDeviceRayTracingFeatures.rayTracingIndirectAccelerationStructureBuild;
+                rayTracingFeatures.rayTracingHostAccelerationStructureCommands = physicalDeviceRayTracingFeatures.rayTracingHostAccelerationStructureCommands;
+                rayTracingFeatures.rayQuery = physicalDeviceRayTracingFeatures.rayQuery;
+                rayTracingFeatures.rayTracingPrimitiveCulling = physicalDeviceRayTracingFeatures.rayTracingPrimitiveCulling;
+                vulkan12Features.pNext = &rayTracingFeatures;
+                */
             }
             else
             {
+                /*
                 float16Int8.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR;
                 float16Int8.shaderFloat16 = physicalDevice.GetPhysicalDeviceFloat16Int8Features().shaderFloat16;
 
@@ -202,11 +246,12 @@ namespace AZ
                 float16Int8.pNext = &separateDepthStencil;
 
                 robustness2.pNext = &float16Int8;
+                */
             }
 
             VkDeviceCreateInfo deviceInfo = {};
             deviceInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-            deviceInfo.pNext = &descriptorIndexingFeatures;
+            deviceInfo.pNext = &depthClipEnabled;
             deviceInfo.flags = 0;
             deviceInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreationInfo.size());
             deviceInfo.pQueueCreateInfos = queueCreationInfo.data();

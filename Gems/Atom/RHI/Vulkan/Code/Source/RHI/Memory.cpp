@@ -27,8 +27,13 @@ namespace AZ
             AZ_Assert(descriptor.m_memoryTypeIndex < memoryProps.memoryTypeCount, "Memory type index is invalid.");
             m_memoryPropertyFlags = memoryProps.memoryTypes[descriptor.m_memoryTypeIndex].propertyFlags;
 
+            VkMemoryAllocateFlagsInfo flagsInfo = {};
+	        flagsInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO;
+	        flagsInfo.flags = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT;
+
             VkMemoryAllocateInfo allocInfo{};
             allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+            allocInfo.pNext = &flagsInfo;
             allocInfo.allocationSize = descriptor.m_sizeInBytes;
             allocInfo.memoryTypeIndex = descriptor.m_memoryTypeIndex;
             VkDeviceMemory deviceMemory;

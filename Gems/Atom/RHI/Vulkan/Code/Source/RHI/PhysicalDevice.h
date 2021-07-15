@@ -80,6 +80,7 @@ namespace AZ
             const VkPhysicalDeviceBufferDeviceAddressFeaturesEXT& GetPhysicalDeviceBufferDeviceAddressFeatures() const;
             const VkPhysicalDeviceVulkan12Features& GetPhysicalDeviceVulkan12Features() const;
             const VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR& GetPhysicalDeviceSeparateDepthStencilFeatures() const;
+            const VkPhysicalDeviceRayTracingFeaturesKHR& GetPhysicalDeviceRayTracingFeatures() const;
             const VkPhysicalDeviceAccelerationStructurePropertiesKHR& GetPhysicalDeviceAccelerationStructureProperties() const;
             const VkPhysicalDeviceRayTracingPipelinePropertiesKHR& GetPhysicalDeviceRayTracingPipelineProperties() const;
             VkFormatProperties GetFormatProperties(RHI::Format format, bool raiseAsserts = true) const;
@@ -114,6 +115,7 @@ namespace AZ
             VkPhysicalDeviceDescriptorIndexingFeaturesEXT m_descriptorIndexingFeatures{};
             VkPhysicalDeviceBufferDeviceAddressFeaturesEXT m_bufferDeviceAddressFeatures{};
             VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR m_separateDepthStencilFeatures{};
+            VkPhysicalDeviceRayTracingFeaturesKHR m_rayTracingFeatures{};
             VkPhysicalDeviceAccelerationStructurePropertiesKHR m_accelerationStructureProperties{};
             VkPhysicalDeviceRayTracingPipelinePropertiesKHR m_rayTracingPipelineProperties{};
             VkPhysicalDeviceVulkan12Features m_vulkan12Features{};
