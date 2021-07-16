@@ -80,6 +80,8 @@ namespace AZ
 
             AZ_RTTI(SwapChain, "{888B64A5-D956-406F-9C33-CF6A54FC41B0}", Object);
 
+            AZStd::atomic_uint resizeCounter = {0};
+
         protected:
             SwapChain();
 

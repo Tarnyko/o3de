@@ -42,6 +42,14 @@ namespace AZ
 
         void CommandQueue::ExecuteWork(const RHI::ExecuteWorkRequest& rhiRequest)
         {
+            for (RHI::SwapChain* swapChain : rhiRequest.m_swapChainsToPresent)
+            {
+                if (swapChain->resizeCounter == 0)
+                {
+                    return;
+                }
+            }
+
             const ExecuteWorkRequest& request = static_cast<const ExecuteWorkRequest&>(rhiRequest);
             QueueCommand([=](void* queue) 
             {
